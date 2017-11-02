@@ -33,4 +33,9 @@ class Game
     else puts "wrong id"
     end
   end
+
+  def check_score
+    status = "You won!"
+    if @score1.length == 4 then puts status end
+  end
 end

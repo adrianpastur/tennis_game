@@ -20,8 +20,19 @@ end
 describe 'the score' do
   # it 'starts with 0'
   it 'can be increased' do
-    game = Game.new
+    game = Game.new('Liam', 'Adrian')
     game.set_score1 0
     expect(game.score_update 1).to eq([0,1])
+
   end
+
+  it "shows who won" do
+    game = Game.new
+    game.set_score1 0
+    game.set_score1 1
+    game.set_score1 2
+    game.set_score1 3
+    expect(game.set_score1).to eq([0,1,2,3])
+  end
+
 end
