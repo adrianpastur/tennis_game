@@ -1,36 +1,54 @@
 require 'pry'
 class Game
-  puts "In Game Class"
-  def set_player1(name)
-    @player1 = name
+  def initialize(player_one, player_two)
+    @player_one = player_one
+    @player_two = player_two
 
+    @player_one_counter = 0
+    @player_two_counter = 0
   end
 
-  def get_player1
-    @player1
+  attr_accessor :player_one, :player_two, :player_one_counter, :player_two_counter
+
+  SCORES = ['0', '15', '30', '40', 'Adv', 'Win']
+
+  def current_score
+    "#{player_one} #{SCORES[player_one_counter]} - #{SCORES[player_two_counter]} #{player_two}"
   end
 
-  def set_player2(name)
-    @player2 = name
-  end
+  def win_condition(input)
 
-  def get_player2
-    @player2
-  end
+    if input == 1 && @player_one_counter <= 4
+      if @player_one_counter < 3
+        @player_one_counter += 1
+      elsif @player_one_counter == 3 && @player_two_counter < 3
+        @player_one_counter +=2
+      elsif @player_one_counter == 3 && @player_two_counter == 3
+        @player_one_counter +=1
+      elsif @player_one_counter == 4 && @player_two_counter == 3
+        @player_one_counter +=1
+      elsif @player_two_counter == 4 && @player_one_counter == 3
+        @player_two_counter -= 1
 
-  def set_score1(score)
-    @score1 = []
-    @score1 << score
-  end
-
-  def get_score1
-    @score1
-  end
-
-  def score_update(id)
-    @id = id
-    if id == 1 then @score1 << 1
-    else puts "wrong id"
+      else
+        puts "Wrong input"
+      end
+    elsif input == 2 && @player_two_counter <=4
+      if @player_two_counter < 3
+        @player_two_counter += 1
+      elsif @player_two_counter == 3 && @player_one_counter <3
+        @player_two_counter +=2
+      elsif @player_two_counter == 3 && @player_one_counter == 3
+        @player_two_counter +=1
+      elsif @player_two_counter == 4 && @player_one_counter == 3
+        @player_two_counter +=1
+      elsif @player_one_counter == 4 && @player_two_counter == 3
+        @player_one_counter -= 1
+      else
+        puts "Wrong input"
+      end
+    else
+      puts "wrong input?"
     end
   end
 end
