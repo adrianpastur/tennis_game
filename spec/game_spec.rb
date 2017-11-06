@@ -1,6 +1,7 @@
-require 'game'
+require 'tennis'
 require 'spec_helper'
 require 'pry'
+
 
 describe 'a player' do
   it 'has a name' do
@@ -57,4 +58,8 @@ describe 'the score' do
     expect(game.current_score).to eq('Liam 40 - 40 Adrian')
   end
 
+  it 'returns nill on wrong input' do
+    game = Game.new('Liam', 'Adrian')
+    expect(game.win_condition 3).to eq(nil)
+  end
 end

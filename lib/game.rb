@@ -1,54 +1,24 @@
-require 'pry'
-class Game
-  def initialize(player_one, player_two)
-    @player_one = player_one
-    @player_two = player_two
+require_relative 'tennis'
 
-    @player_one_counter = 0
-    @player_two_counter = 0
-  end
+def capture_name
+  puts "Player 1 name: "
+  @player1 = gets.chomp
 
-  attr_accessor :player_one, :player_two, :player_one_counter, :player_two_counter
+  puts "Player 2 name: "
+  @player2 = gets.chomp
+end
 
-  SCORES = ['0', '15', '30', '40', 'Adv', 'Win']
+capture_name()
 
-  def current_score
-    "#{player_one} #{SCORES[player_one_counter]} - #{SCORES[player_two_counter]} #{player_two}"
-  end
 
-  def win_condition(input)
+game = Game.new(@player1, @player2)
+puts "Game has started!"
+puts game.current_score
 
-    if input == 1 && @player_one_counter <= 4
-      if @player_one_counter < 3
-        @player_one_counter += 1
-      elsif @player_one_counter == 3 && @player_two_counter < 3
-        @player_one_counter +=2
-      elsif @player_one_counter == 3 && @player_two_counter == 3
-        @player_one_counter +=1
-      elsif @player_one_counter == 4 && @player_two_counter == 3
-        @player_one_counter +=1
-      elsif @player_two_counter == 4 && @player_one_counter == 3
-        @player_two_counter -= 1
-
-      else
-        puts "Wrong input"
-      end
-    elsif input == 2 && @player_two_counter <=4
-      if @player_two_counter < 3
-        @player_two_counter += 1
-      elsif @player_two_counter == 3 && @player_one_counter <3
-        @player_two_counter +=2
-      elsif @player_two_counter == 3 && @player_one_counter == 3
-        @player_two_counter +=1
-      elsif @player_two_counter == 4 && @player_one_counter == 3
-        @player_two_counter +=1
-      elsif @player_one_counter == 4 && @player_two_counter == 3
-        @player_one_counter -= 1
-      else
-        puts "Wrong input"
-      end
-    else
-      puts "wrong input?"
-    end
-  end
+loop do
+  puts "Game point, who won? (use 1 for player 1 and 2 for player 2)"
+  input = gets
+  w = game.win_condition input.to_i
+  puts game.current_score
+  break if w == 5
 end
