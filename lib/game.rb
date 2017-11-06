@@ -1,36 +1,24 @@
-require 'pry'
-class Game
-  puts "In Game Class"
-  def set_player1(name, score = 0)
-    @player1 = name
-    # @score1 = []
-    # @score1 << score
-  end
+require_relative 'tennis'
 
-  def get_player1
-    @player1
-    @score1
-  end
+def capture_name
+  puts "Player 1 name: "
+  @player1 = gets.chomp
 
-  def set_player2(name, score = 0)
-    @player2 = name
-    # @score2 = Array.new[4](score)
-    # @score2 << score
-  end
+  puts "Player 2 name: "
+  @player2 = gets.chomp
+end
 
-  def get_player2
-    @player2
-    @score2
-  end
+capture_name()
 
-  #
-  # def score_update(id, score = 1)
-  #   @id = id
-  #   @score = score
-  #
-  #   if id == 1 then player1 = name, score
-  #   elsif id == 2 then player2 = name, score
-  #   else puts "wrong id"
-  #   end
-  # end
+
+game = Game.new(@player1, @player2)
+puts "Game has started!"
+puts game.current_score
+
+loop do
+  puts "Game point, who won? (use 1 for player 1 and 2 for player 2)"
+  input = gets
+  w = game.win_condition input.to_i
+  puts game.current_score
+  break if w == 5
 end
