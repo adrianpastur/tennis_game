@@ -1,16 +1,16 @@
 require 'tennis'
 require 'spec_helper'
 require 'pry'
-
+require 'game'
 
 describe 'a player' do
   it 'has a name' do
     game = Game.new('Liam', 'Adrian')
     expect(game.player_one).to eq('Liam')
     expect(game.player_two).to eq('Adrian')
-
-
   end
+
+
   it 'has a score' do
     game = Game.new('Liam', 'Adrian')
 
